@@ -1,0 +1,20 @@
+<ion-menu side="end" contentId="menu" [swipeGesture]="false"></ion-menu>
+
+<div id="menu">
+  <ion-header class="ion-no-border" no-shadow>
+    <div class="container header__menu">
+      <div class="logo">
+        <img src="../../../assets/logo.png" alt="logo" />
+      </div>
+      <a class="phone">+7(925)-301-51-94</a>
+      <ion-button style="display: none">
+        <ion-menu-toggle>
+          <div class="hamburger__menu">
+            <span></span><span></span><span></span>
+          </div>
+        </ion-menu-toggle>
+      </ion-button>
+    </div>
+    <ng-content></ng-content>
+  </ion-header>
+</div>

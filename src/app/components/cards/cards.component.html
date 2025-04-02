@@ -1,0 +1,55 @@
+<ion-grid class="container">
+  <ion-row class="cards">
+    <ion-col size="6" size-xl="4" *ngFor="let product of products">
+      <ion-card class="card">
+        <div class="card__imgWrapper">
+          <div class="card__img">
+            <img
+              loading="lazy"
+              alt="Product image"
+              [src]="
+                product.Main_Picture_URL ||
+                'https://ionicframework.com/docs/img/demos/card-media.png'
+              "
+            />
+          </div>
+        </div>
+        <hr class="line" />
+        <ion-card-content class="card__content">
+          <ion-card-title class="card__title">{{
+            product.Short_Description
+          }}</ion-card-title>
+          <p class="card__subtitle"><b>MODEL:</b> {{ product.Product_Code }}</p>
+          <p
+            class="card__desc"
+            ellipsis
+            [ellipsis-content]="product.Short_Description"
+          ></p>
+          <div class="card__btns">
+            <div class="card__logo">
+              <img
+                [src]="product.Brand_Logo"
+                alt="Brand Logo"
+                *ngIf="product.Brand_Logo; else defaultLogo"
+              />
+              <ng-template #defaultLogo>
+                <img
+                  src="https://ionicframework.com/docs/img/demos/card-media.png"
+                  alt="Default Logo"
+                />
+              </ng-template>
+            </div>
+            <button
+              class="card__btn"
+              color="white"
+              (click)="viewProductDetails(product)"
+            >
+              VIEW
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

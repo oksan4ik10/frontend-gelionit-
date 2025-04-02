@@ -35,3 +35,47 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+@import url("./assets/fonts/fonts.css");
+
+
+
+
+* {
+    font-family: Montserrat, Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 400;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    color: var(--middle-red);
+    text-transform: uppercase;
+}
+
+.subtitle {
+    font-size: 16px;
+    text-align: center;
+}
+
+@media (min-width:770px) {
+    .title {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 20px;
+    }
+}
