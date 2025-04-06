@@ -14,8 +14,9 @@
         </video>
       </div>
 
-      <section class="categories">
+      <section class="categories" *ngIf="products && products.length > 0">
         <h3 class="home-title">Оборудование</h3>
+        <app-cards [products]="products"></app-cards>
       </section>
     </div>
   </div>

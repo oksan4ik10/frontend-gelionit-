@@ -1,0 +1,107 @@
+<ion-header class="header ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="medium" (click)="cancel()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding content" forceOverscroll="false">
+  <div *ngIf="submissionMessage" class="message-overlay">
+    <div class="message-content">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+      <p>{{ submissionMessage }}</p>
+    </div>
+  </div>
+  <form [formGroup]="bookForm" (ngSubmit)="confirm()">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col offset="1">
+          <h2 class="modal-title">Свяжитесь с нами</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset="1" size="10">
+          <ion-input
+            class="input"
+            label-placement="floating"
+            fill="solid"
+            formControlName="name_user"
+          >
+            <div slot="label">ФИО <ion-text>*</ion-text></div>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset="1" size="10">
+          <ion-input
+            class="input"
+            label-placement="floating"
+            fill="solid"
+            type="email"
+            formControlName="email"
+          >
+            <div slot="label">Email <ion-text>*</ion-text></div>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset="1" size="10">
+          <ion-input
+            class="input"
+            label-placement="floating"
+            fill="solid"
+            [maskito]="phoneMask"
+            [maskitoElement]="maskPredicate"
+            placeholder="+7 (xxx) xxx-xxxx"
+            formControlName="phone"
+          >
+            <div slot="label">Телефон <ion-text>*</ion-text></div>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset="1" size="10">
+          <ion-textarea
+            class="input"
+            label-placement="floating"
+            fill="solid"
+            type="text"
+            formControlName="desc"
+          >
+            <div slot="label">Дополнительная информация</div>
+          </ion-textarea>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset="1">
+          <ion-checkbox formControlName="optIn" labelPlacement="end">
+            <div class="ion-text-wrap">
+              Согласен на обработку персональных данных
+            </div></ion-checkbox
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <span class="form__btmText">*Поля обязательные к заполнению</span>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col class="btn-row">
+          <ion-button
+            shape="round"
+            type="submit"
+            class="btn ion-justify-content-between"
+          >
+            <div class="btn__wrapper">
+              <span slot="start">Отправить</span>
+            </div>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

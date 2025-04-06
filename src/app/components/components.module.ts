@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { MenuComponent } from './menu/menu.component';
 import { CardsComponent } from './cards/cards.component';
+import { ModalBookComponent } from './modal-book/modal-book.component';
 import { EllipsisModule } from 'ngx-ellipsis';
 
 
@@ -17,6 +18,7 @@ import { EllipsisModule } from 'ngx-ellipsis';
   declarations: [
     MenuComponent,
     CardsComponent,
+    ModalBookComponent
   ],
   imports: [
     IonicModule,
@@ -29,6 +31,7 @@ import { EllipsisModule } from 'ngx-ellipsis';
   exports: [
     MenuComponent,
     CardsComponent,
+    ModalBookComponent
   ],
 })
 export class ComponentsModule { }

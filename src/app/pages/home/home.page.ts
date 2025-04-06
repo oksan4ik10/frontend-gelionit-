@@ -1,7 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 
 import { ModalController } from '@ionic/angular';
-
+import { HttpService } from 'src/app/service/http.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
@@ -12,20 +13,20 @@ export class HomePage implements AfterViewInit, OnInit {
   @Input() productImgs: any[] = [];
   @ViewChild('video', { static: false }) video!: ElementRef;
 
-  categories: any[] = [];
-  news: any[] = [];
+  products: any[] = [];
 
-  isImageError: boolean[] = [];
 
   loading = true
 
   constructor(
     private modalCtrl: ModalController,
+    private httpService: HttpService
   ) { }
 
   ngOnInit() {
 
     console.log('Initializing HomePage');
+    this.getProducts()
 
     // this.httpService.getNews().subscribe(
     //   (data: any) => {
@@ -47,21 +48,22 @@ export class HomePage implements AfterViewInit, OnInit {
       console.error('Failed to play the video', error);
     });
   }
+  getProducts() {
+    this.httpService.getProducts().subscribe(
+      (data: any) => {
+        this.products = data;
+        console.log(data);
 
+      },
+      (error) => {
+        console.error('Error loading categories', error);
+        this.loading = false;
+      }
+    )
 
-
-  async openModal() {
-    // const modal = await this.modalCtrl.create({
-    //   component: ModalBookComponent,
-    //   cssClass: 'enquire',
-    // });
-    // modal.present();
-
-    // const { data, role } = await modal.onWillDismiss();
-
-    // if (role === 'confirm') {
-    //   console.log(data);
-
-    // }
   }
+
+
+
+
 }

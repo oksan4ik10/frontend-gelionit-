@@ -8,7 +8,7 @@
               loading="lazy"
               alt="Product image"
               [src]="
-                product.Main_Picture_URL ||
+                product.img ||
                 'https://ionicframework.com/docs/img/demos/card-media.png'
               "
             />
@@ -17,16 +17,11 @@
         <hr class="line" />
         <ion-card-content class="card__content">
           <ion-card-title class="card__title">{{
-            product.Short_Description
+            product.name
           }}</ion-card-title>
-          <p class="card__subtitle"><b>MODEL:</b> {{ product.Product_Code }}</p>
-          <p
-            class="card__desc"
-            ellipsis
-            [ellipsis-content]="product.Short_Description"
-          ></p>
+          <p class="card__desc">{{ product.desc }}</p>
           <div class="card__btns">
-            <div class="card__logo">
+            <div class="card__logo" style="opacity: 0">
               <img
                 [src]="product.Brand_Logo"
                 alt="Brand Logo"
@@ -42,9 +37,9 @@
             <button
               class="card__btn"
               color="white"
-              (click)="viewProductDetails(product)"
+              (click)="openModal(product)"
             >
-              VIEW
+              Оставить заявку
               <ion-icon name="chevron-forward-outline"></ion-icon>
             </button>
           </div>
