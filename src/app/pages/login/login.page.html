@@ -1,0 +1,54 @@
+<ion-content forceOverscroll="false" class="content">
+  <div class="login">
+    <form
+      *ngIf="loginForm"
+      class="login__form"
+      [formGroup]="loginForm"
+      (ngSubmit)="clickBtnForm($event)"
+    >
+      <h2 class="login__title">Панель управления</h2>
+      <ion-grid>
+        <ion-row class="ion-justify-content-between">
+          <ion-text class="errorMessage" color="danger" *ngIf="errorMessage">
+            {{ errorMessage }}
+          </ion-text>
+          <ion-col size="12">
+            <ion-input
+              formControlName="login"
+              name="login"
+              placeholder="Логин"
+              class="form__input email"
+              fill="outline"
+              shape="round"
+            ></ion-input>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input
+              formControlName="password"
+              placeholder="Пароль"
+              type="password"
+              class="form__input"
+              fill="outline"
+              shape="round"
+            ></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button
+              type="submit"
+              shape="round"
+              class="form__btn ion-justify-content-between btn"
+              [disabled]="loginForm && !loginForm.valid"
+            >
+              <div class="btn__wrapper">
+                <span slot="start">Войти</span>
+                <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+              </div>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </div>
+</ion-content>

@@ -1,0 +1,55 @@
+<ion-content [fullscreen]="true" forceOverscroll="false">
+  <div class="header">
+    <h2>Необработанные заявки</h2>
+  </div>
+  <ion-grid class="container" *ngIf="requests && requests.length > 0">
+    <ion-row>
+      <ion-col size-md="3" size-xs="12" *ngFor="let request of requests">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title
+              >#{{request._id}}<ion-icon name="arrow-redo"></ion-icon
+            ></ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item class="ion-no-padding">
+                <ion-label>
+                  <p>Имя</p>
+                  <ion-text>{{request.name_user}}</ion-text>
+                </ion-label>
+              </ion-item>
+              <ion-item class="ion-no-padding">
+                <ion-label>
+                  <p>Телефон</p>
+                  <ion-text>{{request.phone}}</ion-text>
+                </ion-label>
+              </ion-item>
+              <ion-item class="ion-no-padding">
+                <ion-label>
+                  <p>Email</p>
+                  <ion-text>{{request.email}}</ion-text>
+                </ion-label>
+              </ion-item>
+              <ion-item class="ion-no-padding">
+                <ion-label>
+                  <p>Информация</p>
+                  <ion-text>{{request.desc}}</ion-text>
+                </ion-label>
+              </ion-item>
+              <ion-item lines="none" class="ion-no-padding">
+                <ion-thumbnail slot="start">
+                  <img
+                    alt="Silhouette of mountains"
+                    [src]="request.product.img"
+                  />
+                </ion-thumbnail>
+                <ion-label>{{request.product.name}}</ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
-import { AuthService } from '../service/auth.servict';
+import { AuthService } from '../service/auth.service';
 
 
 @Injectable()

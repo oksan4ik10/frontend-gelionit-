@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { from, Observable, throwError } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import { AuthService } from './auth.servict';
+import { AuthService } from './auth.service';
 
 @Injectable({
     providedIn: 'root',
@@ -27,7 +27,14 @@ export class HttpService {
             )
         );
     }
-
+    getUnprocessedRequests() {
+        return this.http.get(`${this.baseUrl}/requests/manager/unprocessed`, {
+            observe: 'response',
+        })
+            .pipe(
+                map((res: HttpResponse<any>) => res.body)
+            );
+    }
     private getHeader(): Observable<HttpHeaders> {
         return from(this.authService.isAuthenticated()).pipe(
             map(isAuthenticated => {

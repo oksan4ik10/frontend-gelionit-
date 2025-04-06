@@ -11,6 +11,7 @@ export class AuthService {
     private baseUrl = "http://localhost:4000/api";
 
     private token: string | null = null;
+    role: string = "";
 
     constructor(
         private http: HttpClient,
@@ -21,7 +22,9 @@ export class AuthService {
         return new Observable((observer: Observer<any>) => {
             this.http.post(`${this.baseUrl}/auth/login`, credentials).subscribe(
                 async (response: any) => {
-                    await this.setAuthState(response);
+                    console.log(response);
+
+                    this.setAuthState(response);
                     observer.next(response);
                     observer.complete();
                 },
@@ -31,27 +34,34 @@ export class AuthService {
             );
         });
     }
-
-    private async setAuthState(data: any) {
-        this.token = `${data.access_token}`;
-        localStorage.setItem('user_info', data);
+    getRole() {
+        return this.role;
     }
 
-    async logout(): Promise<void> {
+    private setAuthState(data: any) {
+        this.token = `${data.access_token}`;
+        this.role = data.role;
+        localStorage.setItem('user_info', JSON.stringify(data));
+    }
+
+    logout(): void {
         this.token = null;
         localStorage.removeItem('user_info');
         this.router.navigate(['/']);
     }
 
     async isAuthenticated(): Promise<boolean> {
-        const userInfo: any = localStorage.getItem('user_info');
+        const user: any = localStorage.getItem('user_info');
+        const userInfo = user ? JSON.parse(user) : undefined;
+
         if (userInfo) {
             const isExpired = this.isTokenExpired(userInfo.expires);
             if (!isExpired) {
                 this.token = `${userInfo.access_token}`;
+                this.role = userInfo.role;
                 return true;
             } else {
-                await this.logout();
+                this.logout();
                 return false;
             }
         } else {
@@ -60,7 +70,8 @@ export class AuthService {
     }
 
     private isTokenExpired(expiry: number): boolean {
-        return Math.floor(new Date().getTime() / 1000) >= expiry;
+        if (!expiry) return true
+        return Math.floor(new Date().getTime() / 1000) <= expiry;
     }
 
     getAuthToken(): string | null {
