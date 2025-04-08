@@ -78,10 +78,10 @@ export class AuthService {
         return this.token;
     }
 
-    async getCurrentUser(): Promise<any> {
+    getCurrentUser(): any {
         const userInfo = localStorage.getItem('user_info');
         if (userInfo) {
-            return userInfo;
+            return JSON.parse(userInfo);
         } else {
             return null;
         }

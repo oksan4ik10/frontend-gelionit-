@@ -1,0 +1,152 @@
+<ion-header class="header ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="medium" (click)="cancel()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding content" forceOverscroll="false">
+  <div *ngIf="submissionMessage" class="message-overlay">
+    <div class="message-content">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+      <p>{{ submissionMessage }}</p>
+    </div>
+  </div>
+  <form [formGroup]="bookForm" (ngSubmit)="confirm()">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col>
+          <h2 class="modal-title">Оформление заказа</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-input
+            class="input"
+            label-placement="floating"
+            fill="solid"
+            formControlName="name_user"
+          >
+            <div slot="label">ФИО <ion-text>*</ion-text></div>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-input
+            class="input"
+            label-placement="floating"
+            fill="solid"
+            type="email"
+            formControlName="email"
+          >
+            <div slot="label">Email <ion-text>*</ion-text></div>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-input
+            class="input"
+            label-placement="floating"
+            fill="solid"
+            placeholder="+7 (xxx) xxx-xxxx"
+            formControlName="phone"
+          >
+            <div slot="label">Телефон <ion-text>*</ion-text></div>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-textarea
+            class="input"
+            label-placement="floating"
+            fill="solid"
+            type="text"
+            formControlName="address"
+          >
+            <div slot="label">Адрес<ion-text>*</ion-text></div>
+          </ion-textarea>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-input
+            type="number"
+            class="input"
+            label-placement="floating"
+            fill="solid"
+            formControlName="count"
+          >
+            <div slot="label">Количество <ion-text>*</ion-text></div>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="12">
+          <ion-textarea
+            class="input"
+            label-placement="floating"
+            fill="solid"
+            type="text"
+            formControlName="desc"
+          >
+            <div slot="label">Комментарий к заказу</div>
+          </ion-textarea>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item class="item-question">
+            <ion-label>
+              <ion-text>Ответственный <ion-text>*</ion-text></ion-text>
+              <ion-select
+                toggleIcon="chevron-down-outline"
+                justify="space-between"
+                interface="action-sheet"
+                formControlName="IDworker"
+                placeholder="Выберете сотрудника"
+                toggleIcon="caret-down-outline"
+                expandedIcon="caret-up-outline"
+              >
+                <ng-container *ngIf="workers.length > 0">
+                  <ion-select-option
+                    class="container__option"
+                    *ngFor="let item of workers"
+                    [value]="item._id"
+                    >{{ item.name }}</ion-select-option
+                  >
+                </ng-container>
+              </ion-select>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <span class="form__btmText">*Поля обязательные к заполнению</span>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col class="btn-row">
+          <ion-button
+            shape="round"
+            type="submit"
+            class="btn ion-justify-content-between"
+            [disabled]="isDisable"
+          >
+            <div class="btn__wrapper">
+              <span slot="start">Отправить</span>
+            </div>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

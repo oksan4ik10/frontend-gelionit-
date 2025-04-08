@@ -2,11 +2,12 @@
   <div class="header">
     <h2>Необработанные заявки</h2>
   </div>
-  <ion-grid class="container" *ngIf="requests && requests.length > 0">
-    <ion-row>
+  @if(!loader){
+  <ion-grid class="container">
+    <ion-row *ngIf="requests && requests.length > 0">
       <ion-col size-md="3" size-xs="12" *ngFor="let request of requests">
         <ion-card>
-          <ion-card-header>
+          <ion-card-header (click)="openModalOrder(request)">
             <ion-card-title
               >#{{request._id}}<ion-icon name="arrow-redo"></ion-icon
             ></ion-card-title>
@@ -51,5 +52,45 @@
         </ion-card>
       </ion-col>
     </ion-row>
+    <ng-container *ngIf="!requests || requests.length === 0">
+      <h4>Не обработанных заявок нет</h4>
+    </ng-container>
   </ion-grid>
+
+  } @else{
+  <ion-grid class="container">
+    <ion-row>
+      <ion-col
+        size-md="3"
+        size-xs="12"
+        style="background: rgba(255, 255, 255, 1); border-radius: 7px"
+      >
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 100%; height: 320px; border-radius: 7px"
+        ></ion-skeleton-text>
+      </ion-col>
+      <ion-col
+        size-md="3"
+        size-xs="12"
+        style="background: rgba(255, 255, 255, 1); border-radius: 7px"
+      >
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 100%; height: 320px; border-radius: 7px"
+        ></ion-skeleton-text>
+      </ion-col>
+      <ion-col
+        size-md="3"
+        size-xs="12"
+        style="background: rgba(255, 255, 255, 1); border-radius: 7px"
+      >
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 100%; height: 320px; border-radius: 7px"
+        ></ion-skeleton-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  }
 </ion-content>

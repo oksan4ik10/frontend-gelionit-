@@ -1,9 +1,10 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, Observable, throwError } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import { AuthService } from './auth.service';
+import { DeliveryStatus } from '../models/status';
 
 @Injectable({
     providedIn: 'root',
@@ -15,6 +16,27 @@ export class HttpService {
     getProducts() {
         return this.http.get(`${this.baseUrl}/products`, {
             observe: 'response',
+        })
+            .pipe(
+                map((res: HttpResponse<any>) => res.body)
+            );
+    }
+    getWorkers(paramsData?: any) {
+        let params;
+        if (paramsData) {
+            params = new HttpParams({ fromObject: paramsData });
+        }
+        return this.http.get(`${this.baseUrl}/worker`, {
+            observe: 'response',
+            params
+        })
+            .pipe(
+                map((res: HttpResponse<any>) => res.body)
+            );
+    }
+    getBusyWorkers() {
+        return this.http.get(`${this.baseUrl}/worker/busy/free`, {
+            observe: 'response'
         })
             .pipe(
                 map((res: HttpResponse<any>) => res.body)
@@ -34,6 +56,13 @@ export class HttpService {
             .pipe(
                 map((res: HttpResponse<any>) => res.body)
             );
+    }
+    createOrder(data: any): Observable<{ status: DeliveryStatus }> {
+        return this.getHeader().pipe(
+            switchMap(headers =>
+                this.http.post<{ status: DeliveryStatus }>(`${this.baseUrl}/order`, data, { headers })
+            )
+        );
     }
     private getHeader(): Observable<HttpHeaders> {
         return from(this.authService.isAuthenticated()).pipe(
