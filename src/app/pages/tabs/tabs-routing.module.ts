@@ -13,6 +13,11 @@ const routes: Routes = [
         canLoad: [AuthGuard],
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
+      {
+        path: 'tab2',
+        canLoad: [AuthGuard],
+        loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
+      },
       // {
       //   path: 'tab5',
       //   canLoad: [AuthGuard],

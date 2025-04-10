@@ -50,7 +50,16 @@ export class ModalOrderComponent implements OnInit {
     if (!manager) {
       this.modalCtrl.dismiss(null, "error")
     }
-    this.bookForm.patchValue({ name_user: this.request.name_user, phone: this.request.phone, email: this.request.email, IDrequest: this.request._id, IDproduct: this.request.product._id, IDmanager: manager.id })
+    this.bookForm.patchValue({
+      IDmanager: manager.id
+    })
+    if (this.request) {
+      this.bookForm.patchValue({ name_user: this.request.name_user, phone: this.request.phone, email: this.request.email, IDrequest: this.request._id, IDproduct: this.request.product._id })
+    }
+    if (this.IDproduct) {
+      this.bookForm.patchValue({ IDproduct: this.IDproduct })
+    }
+
 
 
   }
@@ -77,7 +86,8 @@ export class ModalOrderComponent implements OnInit {
       if (res.status === DeliveryStatus.WAITING_FOR_STOCK) {
         color = "warning"
       }
-      await this.presentToast(`Заявка создана со статусом "${DeliveryStatusLabels[res.status]}"`, color)
+      const text = this.request ? `Заявка создана со статусом "${DeliveryStatusLabels[res.status]}"` : 'Заказ создан'
+      await this.presentToast(text, color)
       await this.modalCtrl.dismiss(null, "success")
 
     }, async err => {

@@ -19,6 +19,9 @@
           <ion-card-title class="card__title">{{
             product.name
           }}</ion-card-title>
+          <p *ngIf="isOrder" style="font-size: 12px">
+            Количество на складе: <strong>{{ product.count }}</strong>
+          </p>
           <p class="card__desc">{{ product.desc }}</p>
           <div class="card__btns">
             <div class="card__logo" style="opacity: 0">
@@ -35,11 +38,21 @@
               </ng-template>
             </div>
             <button
+              *ngIf="!isOrder"
               class="card__btn"
               color="white"
               (click)="openModal(product)"
             >
               Оставить заявку
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </button>
+            <button
+              *ngIf="isOrder"
+              class="card__btn"
+              color="white"
+              (click)="openModalOrder(product)"
+            >
+              Оформить заказ
               <ion-icon name="chevron-forward-outline"></ion-icon>
             </button>
           </div>

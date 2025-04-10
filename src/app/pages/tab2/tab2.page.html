@@ -1,0 +1,14 @@
+<ion-content [fullscreen]="true" forceOverscroll="false">
+  <div class="header">
+    <h2>Оборудование</h2>
+  </div>
+  @if(products && products.length > 0){
+  <section class="categories">
+    <app-cards
+      [products]="products"
+      [isOrder]="true"
+      (reloadProduct)="getProducts()"
+    ></app-cards>
+  </section>
+  }
+</ion-content>
