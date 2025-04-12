@@ -14,9 +14,6 @@ ion-content {
 }
 
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     width: 97%;
     max-width: 1200px;
     margin: 0px auto;
@@ -24,8 +21,14 @@ ion-content {
     box-shadow: none;
     color: var(--black-dark);
 
+    ion-searchbar {
 
+        -webkit-padding-end: 0px !important;
+        padding-inline-start: 0px !important;
+        max-width: 400px;
+    }
 }
+
 
 .container {
     width: 97%;

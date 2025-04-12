@@ -14,6 +14,7 @@ import { HttpService } from 'src/app/service/http.service';
 export class Tab2Page implements OnInit {
   products: any = []
   loader = true;
+  searchTerm = ""
 
   constructor(public modalCtrl: ModalController, private router: Router, private httpService: HttpService) {
   }
@@ -22,11 +23,10 @@ export class Tab2Page implements OnInit {
     this.getProducts()
   }
   getProducts() {
-    this.httpService.getProducts().subscribe(
+    this.httpService.getProducts(this.searchTerm).subscribe(
       (data: any) => {
         this.products = data;
-        console.log(data);
-
+        this.loader = false;
       },
       (error) => {
         console.error('Error loading categories', error);
@@ -54,6 +54,23 @@ export class Tab2Page implements OnInit {
 
     }
 
+  }
+  handleSearch(e: any) {
+    const target = e.target as HTMLIonSearchbarElement;
+    this.searchTerm = target.value?.toLowerCase() || '';
+    this.loader = true;
+    this.getProducts()
+
+  }
+  updateProduct(product: any) {
+    this.httpService.updateProduct(product._id, product).subscribe(() => {
+      this.loader = true;
+      this.modalCtrl.dismiss()
+      this.getProducts();
+
+    }, (err) => {
+      console.error(err)
+    })
   }
 
 }

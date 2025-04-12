@@ -24,18 +24,30 @@
           </p>
           <p class="card__desc">{{ product.desc }}</p>
           <div class="card__btns">
-            <div class="card__logo" style="opacity: 0">
-              <img
-                [src]="product.Brand_Logo"
-                alt="Brand Logo"
-                *ngIf="product.Brand_Logo; else defaultLogo"
-              />
-              <ng-template #defaultLogo>
-                <img
-                  src="https://ionicframework.com/docs/img/demos/card-media.png"
-                  alt="Default Logo"
-                />
-              </ng-template>
+            <div class="card__logo">
+              <ion-button *ngIf="isOrder" [id]="product._id" expand="block">
+                <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+              </ion-button>
+
+              <ion-modal
+                id="modal-update"
+                reference="trigger"
+                triggerAction="click"
+                [trigger]="product._id"
+              >
+                <ng-template>
+                  <div class="wrapper">
+                    <h5>Обновить количество для "{{ product.name }}"</h5>
+                    <ion-input
+                      type="number"
+                      [(ngModel)]="product.count"
+                    ></ion-input>
+                    <ion-button (click)="updateProductCount(product)"
+                      >Отправить</ion-button
+                    >
+                  </div>
+                </ng-template>
+              </ion-modal>
             </div>
             <button
               *ngIf="!isOrder"

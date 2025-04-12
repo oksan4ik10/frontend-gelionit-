@@ -16,6 +16,7 @@ export class CardsComponent {
   @Input() products: any[] = [];
   @Input() isOrder = false;
   @Output() reloadProduct = new EventEmitter<void>();
+  @Output() updateProduct = new EventEmitter<void>();
   constructor(private router: Router, private modalCtrl: ModalController) { }
 
   async openModal(product: any) {
@@ -54,5 +55,9 @@ export class CardsComponent {
 
     }
 
+  }
+
+  updateProductCount(product: any) {
+    this.updateProduct.emit(product)
   }
 }

@@ -13,8 +13,8 @@ export class HttpService {
     private baseUrl = "http://localhost:4000/api";
 
     constructor(private http: HttpClient, private authService: AuthService) { }
-    getProducts() {
-        return this.http.get(`${this.baseUrl}/products`, {
+    getProducts(searchTerm: string = "") {
+        return this.http.get(`${this.baseUrl}/products?search=${searchTerm}`, {
             observe: 'response',
         })
             .pipe(
@@ -61,6 +61,13 @@ export class HttpService {
         return this.getHeader().pipe(
             switchMap(headers =>
                 this.http.post<{ status: DeliveryStatus }>(`${this.baseUrl}/order`, data, { headers })
+            )
+        );
+    }
+    updateProduct(id: string, data: any) {
+        return this.getHeader().pipe(
+            switchMap(headers =>
+                this.http.patch(`${this.baseUrl}/products/${id}`, data, { headers })
             )
         );
     }

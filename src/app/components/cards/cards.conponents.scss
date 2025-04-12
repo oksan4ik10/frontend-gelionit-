@@ -8,7 +8,6 @@
 
 
     .cards {
-        margin-bottom: -30px;
         margin-top: 20px;
         max-width: 1110px;
         margin: auto;
@@ -82,17 +81,6 @@
 
     }
 
-    &__logo {
-        width: 75%;
-        height: 30px;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            object-position: left center;
-        }
-    }
 
     &__btn {
         color: var(--middle-red);
@@ -177,9 +165,6 @@
         font-size: var(--sizeText);
     }
 
-    .card__logo {
-        height: max(15px, calc(15px + (30 - 15) * ((100vw - 375px) / (768 - 375))));
-    }
 
     .card__content {
         padding: 5px;

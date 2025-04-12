@@ -84,3 +84,30 @@ ion-toast.toast {
     --color: #fff;
     color: #fff;
 }
+
+ion-modal#modal-update {
+    --width: fit-content;
+    --min-width: 250px;
+    --height: fit-content;
+    --border-radius: 6px;
+    --box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
+
+    .wrapper {
+        min-width: 300px;
+        min-height: 200px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        flex-direction: column;
+
+        h5 {
+            text-align: center;
+        }
+
+        ion-input {
+            text-align: center;
+        }
+    }
+}
