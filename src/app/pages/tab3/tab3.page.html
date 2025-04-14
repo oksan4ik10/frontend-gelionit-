@@ -1,0 +1,138 @@
+<ion-content [fullscreen]="true" forceOverscroll="false">
+  <div class="header">
+    <h2>Заказы</h2>
+    <ion-grid>
+      <ion-row class="filters ion-justify-content-between">
+        <ion-col size="12" size-sm="5.5" (click)="handleSortChange()"
+          ><ion-item lines="none" class="ion-no-padding">
+            <ion-icon
+              aria-hidden="true"
+              name="arrow-down"
+              slot="end"
+              class="icon-check"
+              *ngIf="selectSort === 1"
+            ></ion-icon>
+            <ion-icon
+              aria-hidden="true"
+              name="arrow-up"
+              slot="end"
+              class="icon-check"
+              *ngIf="selectSort === -1"
+            ></ion-icon>
+            <ion-label>Дата заказа</ion-label>
+          </ion-item></ion-col
+        >
+        <ion-col size="12" size-sm="5.5">
+          <ion-select
+            [interfaceOptions]="{ cssClass: 'popover-filter' }"
+            class="container__select"
+            toggleIcon="chevron-down-outline"
+            justify="space-between"
+            interface="popover"
+            label="Статус"
+            name="status"
+            [(ngModel)]="status"
+            (ionChange)="handleStatusChange()"
+          >
+            <ion-select-option
+              class="container__option"
+              *ngFor="let status of statusesKeys"
+              [value]="status"
+              >{{statusesWithDesc[status]}}</ion-select-option
+            >
+          </ion-select>
+          <br />
+        </ion-col> </ion-row
+    ></ion-grid>
+  </div>
+
+  @if(!loader){
+  <ion-grid class="container">
+    <ion-row *ngIf="orders && orders.length > 0">
+      <ion-col size-md="2.7" size-xs="12" *ngFor="let order of orders">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title
+              >#{{order._id}}<ion-icon name="arrow-redo"></ion-icon
+            ></ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item class="ion-no-padding">
+                <ion-label>
+                  <p>Статус</p>
+                  <ion-text>{{getStatus(order.status)}}</ion-text>
+                </ion-label>
+              </ion-item>
+              <ion-item class="ion-no-padding">
+                <ion-label>
+                  <p>Ответственный</p>
+                  <ion-text>{{order.worker.name}}</ion-text>
+                </ion-label>
+              </ion-item>
+
+              <ion-item class="ion-no-padding">
+                <ion-label>
+                  <p>Дата заказа</p>
+                  <ion-text>{{getFormatDate(order.date)}}</ion-text>
+                </ion-label>
+              </ion-item>
+              <ion-item lines="none" class="ion-no-padding">
+                <ion-thumbnail slot="start">
+                  <img
+                    alt="Silhouette of mountains"
+                    [src]="order.product.img"
+                  />
+                </ion-thumbnail>
+                <ion-label>
+                  <div>{{order.product.name}}</div>
+                  <div>Количество: <strong>{{order.count}}</strong></div>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ng-container *ngIf="orders.length === 0">
+      <h4>Заказы не найдены</h4>
+    </ng-container>
+  </ion-grid>
+
+  } @else{
+  <ion-grid class="container">
+    <ion-row>
+      <ion-col
+        size-md="2.7"
+        size-xs="12"
+        style="background: rgba(255, 255, 255, 1); border-radius: 7px"
+      >
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 100%; height: 320px; border-radius: 7px"
+        ></ion-skeleton-text>
+      </ion-col>
+      <ion-col
+        size-md="2.7"
+        size-xs="12"
+        style="background: rgba(255, 255, 255, 1); border-radius: 7px"
+      >
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 100%; height: 320px; border-radius: 7px"
+        ></ion-skeleton-text>
+      </ion-col>
+      <ion-col
+        size-md="2.7"
+        size-xs="12"
+        style="background: rgba(255, 255, 255, 1); border-radius: 7px"
+      >
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 100%; height: 320px; border-radius: 7px"
+        ></ion-skeleton-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  }
+</ion-content>

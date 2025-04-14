@@ -111,3 +111,15 @@ ion-modal#modal-update {
         }
     }
 }
+
+
+.popover-filter::part(content) {
+    --width: 80%;
+    max-width: 400px;
+}
+
+.popover-filter {
+    ion-select-popover ion-item {
+        font-size: 14px !important;
+    }
+}

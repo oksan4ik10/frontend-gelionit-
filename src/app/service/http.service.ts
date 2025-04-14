@@ -71,6 +71,14 @@ export class HttpService {
             )
         );
     }
+    getOrders(orderDate = 1, status = "") {
+        return this.http.get(`${this.baseUrl}/orders/?order=${orderDate}&status=${status}`, {
+            observe: 'response',
+        })
+            .pipe(
+                map((res: HttpResponse<any>) => res.body)
+            );
+    }
     private getHeader(): Observable<HttpHeaders> {
         return from(this.authService.isAuthenticated()).pipe(
             map(isAuthenticated => {
