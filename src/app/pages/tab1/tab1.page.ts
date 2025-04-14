@@ -37,7 +37,7 @@ export class Tab1Page implements OnInit {
       component: ModalOrderComponent,
       cssClass: 'enquire',
       componentProps: {
-        IDproduct: request._id,
+        IDproduct: request.product._id,
         request: request
       }
     });

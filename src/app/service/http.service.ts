@@ -60,7 +60,7 @@ export class HttpService {
     createOrder(data: any): Observable<{ status: DeliveryStatus }> {
         return this.getHeader().pipe(
             switchMap(headers =>
-                this.http.post<{ status: DeliveryStatus }>(`${this.baseUrl}/order`, data, { headers })
+                this.http.post<{ status: DeliveryStatus }>(`${this.baseUrl}/orders`, data, { headers })
             )
         );
     }
@@ -85,6 +85,15 @@ export class HttpService {
                 this.http.patch(`${this.baseUrl}/orders/${id}`, data, { headers })
             )
         );
+    }
+    getHistoryOrder(id: string) {
+        return this.http.get(`${this.baseUrl}/orders/history/${id}`, {
+            observe: 'response',
+        })
+            .pipe(
+                map((res: HttpResponse<any>) => res.body)
+            );
+
     }
     private getHeader(): Observable<HttpHeaders> {
         return from(this.authService.isAuthenticated()).pipe(

@@ -1,0 +1,84 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="menu">
+      <app-menu> </app-menu>
+    </div>
+    <div class="content" *ngIf="order">
+      <div class="order">
+        <div class="order__line">
+          <span>Статус заказа: </span>
+          <span class="status">{{getStatus(order.status)}}</span>
+        </div>
+        <div class="order__line">
+          <span>Дата заказа: </span>
+          <span>{{getFormatDate(order.date)}}</span>
+        </div>
+        <div class="order__line">
+          <span>Планируемая дата доставки: </span>
+          <span>{{getFormatDate(order.date_PlanDelivery)}}</span>
+        </div>
+      </div>
+      <section class="desc">
+        <ion-accordion-group
+          [multiple]="true"
+          #accordionGroup
+          (ionChange)="changeIcons($event)"
+        >
+          <ion-accordion value="spec">
+            <div slot="header" color="light">
+              <div class="desc__header">
+                <span class="label">Ход выполнения заказа</span>
+                <ion-icon
+                  [name]="toggleIcons.includes('spec') ? 'arrow-up-outline' : 'arrow-down-outline' "
+                ></ion-icon>
+              </div>
+            </div>
+            <div class="desc__content" slot="content">
+              <ion-grid class="history">
+                <ion-row>
+                  <ion-col size="3"> Статус </ion-col>
+                  <ion-col size="3"> Дата </ion-col>
+                  <ion-col size="3"> Сотрудник </ion-col>
+                </ion-row>
+                <ion-row *ngFor="let order of history">
+                  <ion-col size="3">{{getStatus(order.status)}}</ion-col>
+                  <ion-col size="3"
+                    >{{getFormatDate(order.update_date)}}</ion-col
+                  >
+                  <ion-col size="3">{{order.worker.name}}</ion-col>
+                </ion-row>
+              </ion-grid>
+            </div>
+          </ion-accordion>
+          <ion-accordion value="order">
+            <div slot="header" color="light">
+              <div class="desc__header">
+                <span class="label">Информация о заказе</span>
+                <ion-icon
+                  [name]="toggleIcons.includes('order') ? 'arrow-up-outline' : 'arrow-down-outline' "
+                ></ion-icon>
+              </div>
+            </div>
+            <div class="info__content" slot="content">
+              <div class="info__product">
+                <div class="img">
+                  <img [src]="product.img" alt="image" />
+                </div>
+                <div class="info__text">
+                  <span>{{product.name}}</span>
+                  <span>Количетсво: {{product.count}}</span>
+                </div>
+              </div>
+              <div class="order">
+                <div class="order__line">
+                  <span>Адрес доставки: </span>
+                  <span>{{order.address}}</span>
+                </div>
+              </div>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
+      </section>
+    </div>
+  </div>
+</div>
