@@ -79,6 +79,13 @@ export class HttpService {
                 map((res: HttpResponse<any>) => res.body)
             );
     }
+    updateOrder(id: string, data: any) {
+        return this.getHeader().pipe(
+            switchMap(headers =>
+                this.http.patch(`${this.baseUrl}/orders/${id}`, data, { headers })
+            )
+        );
+    }
     private getHeader(): Observable<HttpHeaders> {
         return from(this.authService.isAuthenticated()).pipe(
             map(isAuthenticated => {

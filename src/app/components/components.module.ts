@@ -13,13 +13,15 @@ import { ModalBookComponent } from './modal-book/modal-book.component';
 import { EllipsisModule } from 'ngx-ellipsis';
 
 import { ModalOrderComponent } from './modal-order/modal-order.component';
+import { ModalEditOrderComponent } from './modal-edit-order/modal-edit-order.component';
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     MenuComponent,
     CardsComponent,
     ModalBookComponent,
-    ModalOrderComponent
+    ModalOrderComponent,
+    ModalEditOrderComponent
   ],
   imports: [
     IonicModule,
@@ -33,7 +35,8 @@ import { ModalOrderComponent } from './modal-order/modal-order.component';
     MenuComponent,
     CardsComponent,
     ModalBookComponent,
-    ModalOrderComponent
+    ModalOrderComponent,
+    ModalEditOrderComponent
   ],
 })
 export class ComponentsModule { }

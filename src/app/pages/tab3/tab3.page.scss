@@ -196,6 +196,10 @@ ion-content {
         --background: var(--middle-blue);
         color: #fff;
 
+        ion-label {
+            font-family: Montserrat;
+        }
+
         ion-icon {
             color: #fff;
         }

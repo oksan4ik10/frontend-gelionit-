@@ -33,6 +33,7 @@ ion-col {
   --padding-start: 10px !important;
   --highlight-color-focused: var(--middle-red);
   --highlight-color-valid: transparent;
+  min-height: 44px;
 }
 
 ion-checkbox {

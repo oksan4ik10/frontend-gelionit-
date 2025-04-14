@@ -4,8 +4,8 @@
 
 .modal-title {
   color: #fff;
-  margin-bottom: 20px;
-  margin-top: 30px;
+  margin-bottom: 0px;
+  margin-top: 0px;
 }
 
 .content {
@@ -111,5 +111,71 @@ ion-checkbox::part(container) {
   50% {
     transform: scale(1.1);
     opacity: 0.9;
+  }
+}
+
+ion-item {
+  --min-height: 0px;
+  --background-hover: none;
+  --background-activated: none;
+  --ripple-color: transparent;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  border-radius: 10px;
+}
+
+ion-select {
+  background: #F2F4F8;
+  padding: 0px;
+  border-radius: 8px;
+  border: 1px solid #F2F4F8;
+  height: 40px;
+  --padding-end: 0px;
+  --padding-bottom: 0px;
+  --padding-top: 0px;
+  --padding-start: 10px;
+  width: 100%;
+  justify-content: space-between;
+  position: relative;
+}
+
+ion-select::part(icon) {
+  color: #232222;
+  opacity: 1;
+  position: absolute;
+  right: 10px;
+  width: 14px;
+  height: 14px;
+}
+
+ion-select::part(placeholder),
+ion-select::part(text) {
+  flex: 0 0 auto;
+  font-size: 12px;
+  color: var(--grey-dark);
+}
+
+ion-select::part(text) {
+  color: var(--black-dark);
+}
+
+.error-message {
+  margin-top: 10px;
+
+  span {
+    color: var(--error-message);
+    text-transform: capitalize;
+    font-size: 12px;
+
+    font-style: italic;
+  }
+}
+
+.row-dates {
+  padding-top: 10px;
+
+  ion-col {
+    color: #fff;
+    font-size: 14px;
   }
 }

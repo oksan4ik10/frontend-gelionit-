@@ -51,7 +51,7 @@
     <ion-row *ngIf="orders && orders.length > 0">
       <ion-col size-md="2.7" size-xs="12" *ngFor="let order of orders">
         <ion-card>
-          <ion-card-header>
+          <ion-card-header (click)="openModalEditOrder(order)">
             <ion-card-title
               >#{{order._id}}<ion-icon name="arrow-redo"></ion-icon
             ></ion-card-title>

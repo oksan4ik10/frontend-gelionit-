@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { distinctUntilChanged, map, Subject, switchMap } from 'rxjs';
+import { ModalEditOrderComponent } from 'src/app/components/modal-edit-order/modal-edit-order.component';
 import { ModalOrderComponent } from 'src/app/components/modal-order/modal-order.component';
 import { DeliveryStatus, DeliveryStatusLabels } from 'src/app/models/status';
 import { HttpService } from 'src/app/service/http.service';
@@ -60,26 +61,6 @@ export class Tab3Page implements OnInit {
     )
 
   }
-  async openModalOrder(request: any) {
-    console.log(request);
-    const modal = await this.modalCtrl.create({
-      component: ModalOrderComponent,
-      cssClass: 'enquire',
-      componentProps: {
-        IDproduct: request._id,
-        request: request
-      }
-    });
-    modal.present();
-
-    const { data, role } = await modal.onWillDismiss();
-
-    if (role === 'success') {
-      this.getOrders()
-
-    }
-
-  }
 
   getStatus(statusEN: DeliveryStatus) {
 
@@ -93,5 +74,23 @@ export class Tab3Page implements OnInit {
   }
   handleStatusChange() {
     this.selectedSortStatusSubject.next("filter")
+  }
+  async openModalEditOrder(order: any) {
+    const modal = await this.modalCtrl.create({
+      component: ModalEditOrderComponent,
+      cssClass: 'enquire',
+      componentProps: {
+        order
+      }
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'success') {
+      this.getOrders()
+
+    }
+
   }
 }
