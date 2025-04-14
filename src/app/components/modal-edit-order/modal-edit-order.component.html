@@ -9,31 +9,30 @@
 </ion-header>
 
 <ion-content class="ion-padding content" forceOverscroll="false" *ngIf="order">
-  <div *ngIf="submissionMessage" class="message-overlay">
-    <div class="message-content">
-      <ion-icon name="checkmark-circle-outline"></ion-icon>
-      <p>{{ submissionMessage }}</p>
-    </div>
-  </div>
   <form [formGroup]="bookForm" (ngSubmit)="confirm()">
     <ion-grid class="ion-no-padding">
       <ion-row>
         <ion-col>
-          <h2 class="modal-title">Редактирование заказа</h2>
+          <h2 class="modal-title" *ngIf="!isNotEdit">Редактирование заказа</h2>
+          <h2 class="modal-title" *ngIf="isNotEdit">Информация о заказе</h2>
         </ion-col>
       </ion-row>
       <ion-row class="row-dates ion-align-items-center">
         <ion-col size="6">
           Дата заказа: {{ getFormatDate(order.date) }}
         </ion-col>
-        <ion-col size="6">
+        <ion-col size="6" *ngIf="!isNotEdit">
           Планируемая дата доставки:
           {{ getFormatDate(order.date_PlanDelivery) }}
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="12">
-          <ion-item class="item-question" lines="none">
+          <ion-item
+            class="item-question"
+            lines="none"
+            *ngIf="!isNotEdit; else textStatus"
+          >
             <ion-label>
               <ion-text>Статус</ion-text>
               <ion-select
@@ -56,6 +55,14 @@
               </ion-select>
             </ion-label>
           </ion-item>
+          <ng-template #textStatus>
+            <div class="order">
+              <div class="order__line">
+                <span>Статус заказа: </span>
+                <span class="status">{{ statusesWithDesc[order.status] }}</span>
+              </div>
+            </div></ng-template
+          >
         </ion-col>
       </ion-row>
       <ion-row>
@@ -122,6 +129,7 @@
             fill="solid"
             type="text"
             formControlName="address"
+            [disabled]="isNotEdit"
           >
             <div slot="label">Адрес<ion-text>*</ion-text></div>
           </ion-textarea>
@@ -136,6 +144,7 @@
             fill="solid"
             type="text"
             formControlName="desc"
+            [disabled]="isNotEdit"
           >
             <div slot="label">Комментарий к заказу</div>
           </ion-textarea>
@@ -160,7 +169,7 @@
         </ion-col>
       </ion-row>
 
-      <ion-row>
+      <ion-row *ngIf="!isNotEdit">
         <ion-col>
           <span class="form__btmText">*Поля обязательные к заполнению</span>
         </ion-col>
@@ -168,6 +177,7 @@
       <ion-row class="ion-justify-content-center">
         <ion-col class="btn-row">
           <ion-button
+            *ngIf="!isNotEdit"
             shape="round"
             type="submit"
             class="btn ion-justify-content-between"

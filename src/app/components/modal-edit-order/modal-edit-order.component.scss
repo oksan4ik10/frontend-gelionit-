@@ -179,3 +179,29 @@ ion-select::part(text) {
     font-size: 14px;
   }
 }
+
+
+.order {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 20px;
+
+  &__line {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .status {
+    padding: 5px;
+    background: #fff;
+    color: var(--middle-blue);
+    border-radius: 5px;
+  }
+
+
+
+}

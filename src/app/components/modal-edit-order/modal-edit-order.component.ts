@@ -25,6 +25,7 @@ export class ModalEditOrderComponent implements OnInit {
   @Input() order: any;
   workers: any = []
   isDisable = false;
+  isNotEdit = false;
   constructor(
     private modalCtrl: ModalController,
     private fb: FormBuilder,
@@ -49,6 +50,16 @@ export class ModalEditOrderComponent implements OnInit {
     }
     if (this.order) {
       this.bookForm.patchValue({ desc: this.order.desc, address: this.order.address, status: this.order.status, IDupdate_user: worker.id })
+      console.log(this.order.status);
+
+      if (this.order.status === "cancelled" || this.order.status === "delivered") {
+        this.isNotEdit = true;
+        this.bookForm.get('address')?.disable();
+        this.bookForm.get('desc')?.disable();
+      }
+
+      console.log(this.isNotEdit);
+
     }
 
 
