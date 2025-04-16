@@ -1,0 +1,93 @@
+<ion-content [fullscreen]="true" forceOverscroll="false">
+  <div class="header">
+    <h2>Сотрудники</h2>
+    <ion-searchbar
+      [debounce]="1000"
+      (ionInput)="handleSearch($event)"
+      placeholder="Поиск"
+    ></ion-searchbar>
+  </div>
+
+  @if(workers && workers.length > 0 && !loader){
+  <section class="categories">
+    <ion-grid class="container">
+      <ion-row>
+        <ion-col size-md="3" size-xs="12" *ngFor="let worker of workers">
+          <ion-card>
+            <ion-card-header (click)="openModalWorker(worker)">
+              <ion-card-title
+                >#{{worker._id}}<ion-icon name="arrow-redo"></ion-icon
+              ></ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-item class="ion-no-padding">
+                  <ion-label>
+                    <p>Имя</p>
+                    <ion-text>{{worker.name}}</ion-text>
+                  </ion-label>
+                </ion-item>
+                <ion-item class="ion-no-padding">
+                  <ion-label>
+                    <p>Роль</p>
+                    <ion-text>{{worker.role.name}}</ion-text>
+                  </ion-label>
+                </ion-item>
+                <ion-item class="ion-no-padding">
+                  <ion-label>
+                    <p>Логин</p>
+                    <ion-text>{{worker.login}}</ion-text>
+                  </ion-label>
+                </ion-item>
+                <ion-item class="ion-no-padding">
+                  <ion-label>
+                    <p>Задействован в заказе?</p>
+                    <ion-text>{{worker.busy ? "Да" : "Нет"}}</ion-text>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row></ion-grid
+    >
+  </section>
+  } @else if (loader){
+  <ion-grid class="container">
+    <ion-row class="cards">
+      <ion-col
+        size="5"
+        size-xl="3.2"
+        style="background: rgba(255, 255, 255, 1); border-radius: 7px"
+      >
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 100%; height: 350px; border-radius: 7px"
+        ></ion-skeleton-text>
+      </ion-col>
+      <ion-col
+        size="5"
+        size-xl="3.2"
+        style="background: rgba(255, 255, 255, 1); border-radius: 7px"
+      >
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 100%; height: 350px; border-radius: 7px"
+        ></ion-skeleton-text>
+      </ion-col>
+      <ion-col
+        size="5"
+        size-xl="3.2"
+        style="background: rgba(255, 255, 255, 1); border-radius: 7px"
+      >
+        <ion-skeleton-text
+          [animated]="true"
+          style="width: 100%; height: 350px; border-radius: 7px"
+        ></ion-skeleton-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  } @else{
+  <h3>По запросу "{{searchTerm}}" сотрудники не найдены</h3>
+  }
+</ion-content>

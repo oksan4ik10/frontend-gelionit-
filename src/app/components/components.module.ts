@@ -14,6 +14,8 @@ import { EllipsisModule } from 'ngx-ellipsis';
 
 import { ModalOrderComponent } from './modal-order/modal-order.component';
 import { ModalEditOrderComponent } from './modal-edit-order/modal-edit-order.component';
+import { ModalWorkerComponent } from './modal-worker/modal-worker.component';
+
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
@@ -21,7 +23,8 @@ import { ModalEditOrderComponent } from './modal-edit-order/modal-edit-order.com
     CardsComponent,
     ModalBookComponent,
     ModalOrderComponent,
-    ModalEditOrderComponent
+    ModalEditOrderComponent,
+    ModalWorkerComponent
   ],
   imports: [
     IonicModule,
@@ -36,7 +39,8 @@ import { ModalEditOrderComponent } from './modal-edit-order/modal-edit-order.com
     CardsComponent,
     ModalBookComponent,
     ModalOrderComponent,
-    ModalEditOrderComponent
+    ModalEditOrderComponent,
+    ModalWorkerComponent
   ],
 })
 export class ComponentsModule { }

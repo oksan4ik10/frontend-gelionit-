@@ -1,0 +1,115 @@
+<ion-header class="header ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button color="medium" (click)="cancel()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding content" forceOverscroll="false">
+  <form [formGroup]="bookForm" (ngSubmit)="confirm()">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col>
+          <h2 class="modal-title">
+            {{ worker ? "Редактирование сотрудника" : "Создание сотрудника" }}
+          </h2>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-input
+            class="input"
+            label-placement="floating"
+            fill="solid"
+            formControlName="name"
+          >
+            <div slot="label">ФИО <ion-text *ngIf="!worker">*</ion-text></div>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-input
+            class="input"
+            label-placement="floating"
+            fill="solid"
+            formControlName="login"
+          >
+            <div slot="label">Логин <ion-text *ngIf="!worker">*</ion-text></div>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-item
+            class="item-question"
+            [class.selectDisabled]="worker"
+            lines="none"
+          >
+            <ion-label>
+              <ion-text>Роль <ion-text *ngIf="!worker">*</ion-text></ion-text>
+              <ion-select
+                *ngIf="!worker; else role"
+                toggleIcon="chevron-down-outline"
+                justify="space-between"
+                interface="action-sheet"
+                formControlName="idRole"
+                placeholder="Выберите сотрудника"
+                toggleIcon="caret-down-outline"
+                expandedIcon="caret-up-outline"
+              >
+                <ng-container *ngIf="roles.length > 0">
+                  <ion-select-option
+                    class="container__option"
+                    *ngFor="let item of roles"
+                    [value]="item._id"
+                    >{{ item.name }}</ion-select-option
+                  >
+                </ng-container>
+              </ion-select>
+              <ng-template #role>
+                <h2>{{ worker.role.name }}</h2>
+              </ng-template>
+            </ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-input
+            class="input"
+            label-placement="floating"
+            fill="solid"
+            type="password"
+            formControlName="password"
+          >
+            <div slot="label">Пароль <ion-text>*</ion-text></div>
+          </ion-input>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <span class="form__btmText">*Поля обязательные к заполнению</span>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-col class="btn-row">
+          <ion-button
+            shape="round"
+            type="submit"
+            class="btn ion-justify-content-between"
+            [disabled]="isDisable"
+          >
+            <div class="btn__wrapper">
+              <span slot="start">Отправить</span>
+            </div>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

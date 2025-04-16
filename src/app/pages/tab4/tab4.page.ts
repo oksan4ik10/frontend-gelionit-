@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ModalOrderComponent } from 'src/app/components/modal-order/modal-order.component';
+import { ModalWorkerComponent } from 'src/app/components/modal-worker/modal-worker.component';
 import { HttpService } from 'src/app/service/http.service';
 
 
 @Component({
-  selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss'],
+  selector: 'app-tab4',
+  templateUrl: 'tab4.page.html',
+  styleUrls: ['tab4.page.scss'],
   standalone: false,
 })
-export class Tab2Page implements OnInit {
-  products: any = []
+export class Tab4Page implements OnInit {
+  workers: any = []
   loader = true;
   searchTerm = ""
 
@@ -20,12 +21,12 @@ export class Tab2Page implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getProducts()
+    this.getWorkers()
   }
-  getProducts() {
-    this.httpService.getProducts(this.searchTerm).subscribe(
+  getWorkers() {
+    this.httpService.getWorkers(this.searchTerm).subscribe(
       (data: any) => {
-        this.products = data;
+        this.workers = data;
         this.loader = false;
       },
       (error) => {
@@ -35,13 +36,12 @@ export class Tab2Page implements OnInit {
     )
 
   }
-  async openModalOrder(request: any) {
+  async openModalWorker(worker: any) {
     const modal = await this.modalCtrl.create({
-      component: ModalOrderComponent,
+      component: ModalWorkerComponent,
       cssClass: 'enquire',
       componentProps: {
-        IDproduct: request.product._id,
-        request: request
+        worker
       }
     });
     modal.present();
@@ -49,9 +49,7 @@ export class Tab2Page implements OnInit {
     const { data, role } = await modal.onWillDismiss();
 
     if (role === 'success') {
-      this.loader = true;
-
-      this.getProducts()
+      this.getWorkers()
 
     }
 
@@ -60,14 +58,14 @@ export class Tab2Page implements OnInit {
     const target = e.target as HTMLIonSearchbarElement;
     this.searchTerm = target.value?.toLowerCase() || '';
     this.loader = true;
-    this.getProducts()
+    this.getWorkers()
 
   }
   updateProduct(product: any) {
     this.httpService.updateProduct(product._id, product).subscribe(() => {
       this.loader = true;
       this.modalCtrl.dismiss()
-      this.getProducts();
+      this.getWorkers();
 
     }, (err) => {
       console.error(err)

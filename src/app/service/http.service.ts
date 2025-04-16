@@ -21,14 +21,17 @@ export class HttpService {
                 map((res: HttpResponse<any>) => res.body)
             );
     }
-    getWorkers(paramsData?: any) {
-        let params;
-        if (paramsData) {
-            params = new HttpParams({ fromObject: paramsData });
-        }
-        return this.http.get(`${this.baseUrl}/worker`, {
+    getWorkers(searchTerm: string = "") {
+        return this.http.get(`${this.baseUrl}/workers?search=${searchTerm}`, {
             observe: 'response',
-            params
+        })
+            .pipe(
+                map((res: HttpResponse<any>) => res.body)
+            );
+    }
+    getRoles() {
+        return this.http.get(`${this.baseUrl}/roles`, {
+            observe: 'response',
         })
             .pipe(
                 map((res: HttpResponse<any>) => res.body)
@@ -41,6 +44,13 @@ export class HttpService {
             .pipe(
                 map((res: HttpResponse<any>) => res.body)
             );
+    }
+    updateWorker(id: string, data: any) {
+        return this.getHeader().pipe(
+            switchMap(headers =>
+                this.http.patch(`${this.baseUrl}/workers/${id}`, data, { headers })
+            )
+        );
     }
     createResponse(data: any) {
         return this.getHeader().pipe(
@@ -86,6 +96,13 @@ export class HttpService {
             )
         );
     }
+    createWorker(data: any) {
+        return this.getHeader().pipe(
+            switchMap(headers =>
+                this.http.post(`${this.baseUrl}/workers`, data, { headers })
+            )
+        );
+    }
     getHistoryOrder(id: string) {
         return this.http.get(`${this.baseUrl}/orders/history/${id}`, {
             observe: 'response',
@@ -95,6 +112,7 @@ export class HttpService {
             );
 
     }
+
     private getHeader(): Observable<HttpHeaders> {
         return from(this.authService.isAuthenticated()).pipe(
             map(isAuthenticated => {
