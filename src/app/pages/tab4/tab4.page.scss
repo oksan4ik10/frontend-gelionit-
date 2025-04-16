@@ -27,6 +27,21 @@ ion-content {
         padding-inline-start: 0px !important;
         max-width: 400px;
     }
+
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        ion-button {
+            flex: 0 0 50px;
+            height: 50px;
+
+            ion-icon {
+                font-size: 30px;
+            }
+        }
+    }
 }
 
 

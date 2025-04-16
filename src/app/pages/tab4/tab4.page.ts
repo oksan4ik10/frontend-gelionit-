@@ -54,6 +54,21 @@ export class Tab4Page implements OnInit {
     }
 
   }
+  async openCreateModal() {
+    const modal = await this.modalCtrl.create({
+      component: ModalWorkerComponent,
+      cssClass: 'enquire',
+    });
+    modal.present();
+
+    const { data, role } = await modal.onWillDismiss();
+
+    if (role === 'success') {
+      this.getWorkers()
+
+    }
+
+  }
   handleSearch(e: any) {
     const target = e.target as HTMLIonSearchbarElement;
     this.searchTerm = target.value?.toLowerCase() || '';

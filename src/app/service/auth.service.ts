@@ -47,7 +47,7 @@ export class AuthService {
     logout(): void {
         this.token = null;
         localStorage.removeItem('user_info');
-        this.router.navigate(['/']);
+        this.router.navigate(['/login']);
     }
 
     async isAuthenticated(): Promise<boolean> {

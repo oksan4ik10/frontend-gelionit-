@@ -1,0 +1,26 @@
+<ion-content [fullscreen]="true" forceOverscroll="false">
+  <div class="header">
+    <h2>Личный кабинет</h2>
+  </div>
+  <div class="container">
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <h3>Имя</h3>
+          <p>{{user.name}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Роль</h3>
+          <p>{{user.role.name}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item button lines="none" (click)="exit()">
+        <ion-label>
+          <p>Выход</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
