@@ -1,6 +1,6 @@
 <ion-tabs class="tabs">
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1" href="/tabs/tab1">
+    <ion-tab-button *ngIf="!isWorker" tab="tab1" href="/tabs/tab1">
       <div class="wrapper">
         <svg
           width="21"
@@ -16,7 +16,7 @@
       </div>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab2" href="/tabs/tab2">
+    <ion-tab-button *ngIf="!isWorker" tab="tab2" href="/tabs/tab2">
       <div class="wrapper">
         <svg
           fill="none"
@@ -53,7 +53,7 @@
         <ion-label>Заказы</ion-label>
       </div>
     </ion-tab-button>
-    <ion-tab-button tab="tab4" href="/tabs/tab4">
+    <ion-tab-button *ngIf="!isWorker&&!isManager" tab="tab4" href="/tabs/tab4">
       <div class="wrapper">
         <svg
           width="24"

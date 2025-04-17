@@ -40,25 +40,29 @@ export class AuthService {
 
     private setAuthState(data: any) {
         this.token = `${data.access_token}`;
-        this.role = data.role;
+        this.role = data.role.code;
         localStorage.setItem('user_info', JSON.stringify(data));
     }
 
     logout(): void {
         this.token = null;
+        this.role = "";
         localStorage.removeItem('user_info');
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login'], { replaceUrl: true });
     }
 
     async isAuthenticated(): Promise<boolean> {
         const user: any = localStorage.getItem('user_info');
         const userInfo = user ? JSON.parse(user) : undefined;
+        console.log(userInfo);
 
         if (userInfo) {
             const isExpired = this.isTokenExpired(userInfo.expires);
+            console.log("isExpired", isExpired);
+
             if (!isExpired) {
                 this.token = `${userInfo.access_token}`;
-                this.role = userInfo.role;
+                this.role = userInfo.role.code;
                 return true;
             } else {
                 this.logout();

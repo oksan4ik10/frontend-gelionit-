@@ -22,9 +22,10 @@ export class HttpService {
             );
     }
     getWorkers(searchTerm: string = "") {
-        return this.http.get(`${this.baseUrl}/workers?search=${searchTerm}`, {
-            observe: 'response',
-        })
+        return this.getHeader().pipe(
+            switchMap(headers => this.http.get(`${this.baseUrl}/workers?search=${searchTerm}`, {
+                observe: 'response', headers
+            })))
             .pipe(
                 map((res: HttpResponse<any>) => res.body)
             );
@@ -38,7 +39,7 @@ export class HttpService {
             );
     }
     getBusyWorkers() {
-        return this.http.get(`${this.baseUrl}/worker/busy/free`, {
+        return this.http.get(`${this.baseUrl}/workers/busy/free`, {
             observe: 'response'
         })
             .pipe(
@@ -82,9 +83,10 @@ export class HttpService {
         );
     }
     getOrders(orderDate = 1, status = "") {
-        return this.http.get(`${this.baseUrl}/orders/?order=${orderDate}&status=${status}`, {
-            observe: 'response',
-        })
+        return this.getHeader().pipe(
+            switchMap(headers => this.http.get(`${this.baseUrl}/orders/?order=${orderDate}&status=${status}`, {
+                observe: 'response', headers
+            })))
             .pipe(
                 map((res: HttpResponse<any>) => res.body)
             );
