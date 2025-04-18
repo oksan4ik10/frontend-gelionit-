@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root'
 })
 export class AuthService {
-    private baseUrl = "http://localhost:4000/api";
+    private baseUrl = "https://gelionit.onrender.com/api";
 
     private token: string | null = null;
     role: string = "";

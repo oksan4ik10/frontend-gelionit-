@@ -10,7 +10,7 @@ import { DeliveryStatus } from '../models/status';
     providedIn: 'root',
 })
 export class HttpService {
-    private baseUrl = "http://localhost:4000/api";
+    private baseUrl = "https://gelionit.onrender.com/api";
 
     constructor(private http: HttpClient, private authService: AuthService) { }
     getProducts(searchTerm: string = "") {
