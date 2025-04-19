@@ -22,8 +22,6 @@ export class AuthService {
         return new Observable((observer: Observer<any>) => {
             this.http.post(`${this.baseUrl}/auth/login`, credentials).subscribe(
                 async (response: any) => {
-                    console.log(response);
-
                     this.setAuthState(response);
                     observer.next(response);
                     observer.complete();
@@ -54,11 +52,9 @@ export class AuthService {
     async isAuthenticated(): Promise<boolean> {
         const user: any = localStorage.getItem('user_info');
         const userInfo = user ? JSON.parse(user) : undefined;
-        console.log(userInfo);
 
         if (userInfo) {
             const isExpired = this.isTokenExpired(userInfo.expires);
-            console.log("isExpired", isExpired);
 
             if (!isExpired) {
                 this.token = `${userInfo.access_token}`;

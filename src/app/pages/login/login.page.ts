@@ -36,8 +36,9 @@ export class LoginPage implements OnInit {
     this.authService.loginUser({ login: this.loginForm.value.login, password: this.loginForm.value.password }).subscribe(
 
       response => {
-        console.log('Login successful', response);
-        this.router.navigate(['/tabs/tab1'], { replaceUrl: true });
+        const role = response.role.code
+        if (role === 'worker') this.router.navigate(['/tabs/tab3'], { replaceUrl: true });
+        else this.router.navigate(['/tabs/tab1'], { replaceUrl: true });
       },
       error => {
         console.error('Login failed', error);
